@@ -9,10 +9,10 @@ import { clerkwebhooks } from './controllers/webhooks.js'
 // Initialize express 
 
 const app = express()
-
+app.use(express.json());
 //connect to database
 
-
+await connectDB()
 // MiddleWares
 
 app.use(cors())
@@ -21,11 +21,11 @@ app.use(cors())
 app.get('/', (req, res)=> res.send("API WORKING"))
 
 
-// app.post('/clerk', express.json(), clerkwebhooks)
+app.post('/clerk', express.json(), clerkwebhooks)
 
-app.post("/api/webhooks/clerk", express.raw({ type: "application/json" }), clerkwebhooks);
-app.use(express.json());
-await connectDB()
+// app.post("/api/webhooks/clerk", clerkwebhooks);
+
+
 // Prevent favicon.ico 500 error
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 // Port

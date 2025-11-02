@@ -4,12 +4,13 @@ import User from "../models/User.js";
 
 //API Controller Function to manage Clerk User with database
 export const clerkwebhooks = async (req, res)=>{
-      console.log("📩 Clerk webhook triggered");
+console.log("📩 Clerk webhook triggered");
 console.log("Headers:", req.headers);
 console.log("Raw body:", req.body);
 
 try {
-const whook = new Webhook (process.env.CLERK_WEBHOOK_SECRET)
+    console.log("📩 Clerk Webhook Received:", req.body);
+const whook = new Webhook (process.env.CLERK_WEBHOOK_SECRET);
 
 await whook.verify(JSON.stringify(req.body), {
     
@@ -18,7 +19,7 @@ await whook.verify(JSON.stringify(req.body), {
   "svix-signature": req.headers["svix-signature"],
 });
 
-const {data, type} = req.body
+const {data, type} = req.body;
 
 switch (type) {
 case 'user.created': {

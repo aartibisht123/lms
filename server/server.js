@@ -12,14 +12,22 @@ const app = express()
 
 //connect to database
 
-await connectDB()
+
 // MiddleWares
 
 app.use(cors())
 
 // Routes
 app.get('/', (req, res)=> res.send("API WORKING"))
-app.post('/clerk', express.json(), clerkwebhooks)
+
+
+// app.post('/clerk', express.json(), clerkwebhooks)
+
+app.post("/api/webhooks/clerk", express.raw({ type: "application/json" }), clerkwebhooks);
+app.use(express.json());
+await connectDB()
+// Prevent favicon.ico 500 error
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 // Port
 
 const PORT = process.env.PORT || 4000

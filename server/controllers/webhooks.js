@@ -53,6 +53,8 @@ break;
 
 } catch (error) {
 res.json({success: false, message: error.message})
+console.error("❌ Clerk Webhook Error:", error);
+
 }
 }
 

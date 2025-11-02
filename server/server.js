@@ -11,8 +11,7 @@ import { clerkwebhooks } from './controllers/webhooks.js'
 const app = express()
 app.use(express.json());
 //connect to database
-
-await connectDB()
+ connectDB()
 // MiddleWares
 
 app.use(cors())
@@ -24,6 +23,7 @@ app.get('/', (req, res)=> res.send("API WORKING"))
 app.post('/clerk', express.json(), clerkwebhooks)
 
 // app.post("/api/webhooks/clerk", clerkwebhooks);
+// app.post('/api/webhooks/clerk', express.json(), clerkwebhooks)
 
 
 // Prevent favicon.ico 500 error

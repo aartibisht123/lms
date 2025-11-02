@@ -4,7 +4,7 @@ import express from 'express'
 import cors from 'cors'
 import connectDB from './configs/mongodb.js'
 import { clerkwebhooks } from './controllers/webhooks.js'
-import mongoose from 'mongoose'
+
 
 // Initialize express 
 const app = express()
@@ -18,8 +18,8 @@ app.use(cors())
 
 // Routes
 app.get('/', (req, res)=> res.send("API WORKING"))
-// app.post('/clerk', express.json(), clerkwebhooks)
-app.post("clerk", express.raw({ type: "application/json" }), clerkwebhooks);
+app.post('/clerk', express.json(), clerkwebhooks)
+
 
 
 

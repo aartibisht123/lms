@@ -1,6 +1,7 @@
 import { Webhook } from "svix";
 import User from "../models/User.js";
 import { request, response } from "express";
+
 import Stripe from "stripe";
 import { Purchase } from "../models/purchase.js";
 import Course from "../models/Course.js";
@@ -62,6 +63,7 @@ console.error("❌ Clerk Webhook Error:", error);
 const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 export const stripeWebhooks = async(request, response)=>{
+   console.log("📩 Stripe webhook triggered");
   const sig = request.headers['stripe-signature'];
 
   let event;

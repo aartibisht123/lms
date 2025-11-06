@@ -6,4 +6,4 @@ courseId: {type: String, required: true}, completed: {type: Boolean, default: fa
  lectureCompleted: []
 }, {minimize: false });
 
-export const CourseProgress = mongoose.model('CourseProgress', courseProgressSchema)
+export const CourseProgress = mongoose.model('CourseProgress', courseProgressSchema);

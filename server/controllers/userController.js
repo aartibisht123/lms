@@ -2,6 +2,7 @@ import User from "../models/User.js"
 import Stripe from "stripe";
 import { Purchase } from "../models/purchase.js";
 import Course from '../models/Course.js'
+import { CourseProgress } from "../models/CourseProgress.js";
 
 // get user data
 export const getUserData = async (req, res)=>{
@@ -56,7 +57,7 @@ const newPurchase =await Purchase.create(purchaseData)
 
 const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-const currency = process.env.CURRENCTY.toLowerCase()
+const currency = process.env.CURRENCY.toLowerCase()
 
 // Creating line items to for Stripe
 
@@ -128,7 +129,7 @@ export const getUserCourseProgress = async (req, res) =>{
 try {
 const {userId}= req.auth();
 const {courseId} = req.body
-const progressData = await CourseProgress.findOne((userId, courseId))
+const progressData = await CourseProgress.findOne({userId, courseId})
 res.json({success: true, progressData})
 
 } catch (error) {

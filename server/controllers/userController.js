@@ -57,7 +57,7 @@ const newPurchase =await Purchase.create(purchaseData)
 
 const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-const currency = (process.env.CURRENCY || 'usd').toLowerCase();
+const currency = process.env.CURRENCY.toLowerCase()
 
 // Creating line items to for Stripe
 
